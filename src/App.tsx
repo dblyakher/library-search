@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import "./BookList"
 import './App.css';
+import BooksListContextProvider from './contexts/BooksListContext';
+import BookSelectedContextProvider from './contexts/BookSelectedContext';
 
-function App() {
+import BookSearchPage from './BookSearchPage';
+import BookEditPage from './BookEditPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+
+export default function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+    <BooksListContextProvider>
+      <BookSelectedContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route index element = {<BookSearchPage />} />
+            <Route path="edit" element= {<BookEditPage />} />
+          </Routes>
+        </BrowserRouter>
+      </BookSelectedContextProvider>
+    </BooksListContextProvider>
+   </>
   );
 }
 
-export default App;
+
